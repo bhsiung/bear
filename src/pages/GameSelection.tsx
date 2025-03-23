@@ -26,6 +26,13 @@ const games: GameCard[] = [
     path: "/games/splendor",
     imageUrl: "/images/splendor.png",
   },
+  {
+    id: "number-guessing",
+    title: "Number Guessing",
+    description: "Guess the 4-digit secret number with unique digits.",
+    path: "/games/number-guessing",
+    imageUrl: "/images/number-guessing.png",
+  },
   // Add more games here as they are developed
 ];
 

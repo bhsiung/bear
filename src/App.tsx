@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GameSelection from "./pages/GameSelection";
 import TikTokToe from "./pages/games/TikTokToe";
 import Splendor from "./pages/games/Splendor";
+import NumberGuessing from "./pages/games/NumberGuessGame";
 import styled from "@emotion/styled";
 
 const AppContainer = styled.div`
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<GameSelection />} />
           <Route path="/games/tiktoktoe" element={<TikTokToe />} />
           <Route path="/games/splendor" element={<Splendor />} />
+          <Route path="/games/number-guessing" element={<NumberGuessing />} />
           {/* Add more routes for individual games here */}
         </Routes>
       </AppContainer>

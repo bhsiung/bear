@@ -78,8 +78,62 @@ const TikTokToe: React.FC = () => {
   };
 
   const findBestMove = (currentBoard: BoardState): number => {
-    // Simple AI implementation - picks first available spot
-    return currentBoard.findIndex((square) => square === null);
+    // Minimax algorithm implementation for unbeatable AI
+    const minimax = (
+      board: BoardState,
+      depth: number,
+      isMaximizing: boolean
+    ): number => {
+      const [winner] = calculateWinner(board);
+      const isDraw = board.every((square) => square !== null);
+
+      // Terminal states
+      if (winner === "O") return 10 - depth;
+      if (winner === "X") return depth - 10;
+      if (isDraw) return 0;
+
+      if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+          if (!board[i]) {
+            board[i] = "O";
+            const score = minimax(board, depth + 1, false);
+            board[i] = null;
+            bestScore = Math.max(score, bestScore);
+          }
+        }
+        return bestScore;
+      } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < board.length; i++) {
+          if (!board[i]) {
+            board[i] = "X";
+            const score = minimax(board, depth + 1, true);
+            board[i] = null;
+            bestScore = Math.min(score, bestScore);
+          }
+        }
+        return bestScore;
+      }
+    };
+
+    // Find the best move using minimax
+    let bestScore = -Infinity;
+    let bestMove = 0;
+
+    for (let i = 0; i < currentBoard.length; i++) {
+      if (!currentBoard[i]) {
+        currentBoard[i] = "O";
+        const score = minimax(currentBoard, 0, false);
+        currentBoard[i] = null;
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = i;
+        }
+      }
+    }
+
+    return bestMove;
   };
 
   const getStatus = () => {
